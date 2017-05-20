@@ -1,0 +1,151 @@
+\documentclass{sig-alternate}
+
+\usepackage{amsmath}
+\usepackage[linesnumbered,boxed]{algorithm2e}
+\usepackage{subfigure}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{multirow}
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+
+\begin{document}
+
+\title{A Formal Product Search Model with Ensembled Proximity}
+
+
+\numberofauthors{3}
+\author{
+\alignauthor
+Zepeng Fang\\
+       \affaddr{Department of Computer Science}\\
+       \affaddr{Xiamen University}\\
+			\affaddr{422 Siming South Road}\\
+       \affaddr{Xiamen, Fujian, China, 361005}\\
+       \email{jiehuang@stu.xmu.edu.cn}
+% 2nd. author
+\alignauthor
+Chen Lin\\
+        \affaddr{Department of Computer Science}\\
+       \affaddr{Xiamen University}\\
+			\affaddr{422 Siming South Road}\\
+       \affaddr{Xiamen, Fujian, China, 361005}\\
+       \email{chenlin@xmu.edu.cn}
+% 3rd. author
+\alignauthor Jian Pei\\
+       \affaddr{School of Computing Science}\\
+       \affaddr{Simon Frasor University}\\
+       \affaddr{8888 University Drive}\\
+			\affaddr{Burnaby, BC, Canada, V5A 1S6}\\
+       \email{jpei@cs.sfu.ca}
+}
+
+
+\maketitle
+\begin{abstract}
+In this paper we study the
+\end{abstract}
+
+% A category with the (minimum) three required fields
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+%A category including the fourth, optional field follows...
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Theory}
+
+\keywords{ACM proceedings, \LaTeX, text tagging}
+
+\section{Introduction}\label{sec:introduction}
+Recently, there has been increasing interest in the problem of product search, due to the abundance of online reviews. Revew websites, such as TripAdvisor\footnote{http://www.tripadvisor.com/}, Yelp\footnote{http://www.yelp.com/} and their counterparts in many e-commerce sites, provide listings of products or local businesses on which users are free to comment. Review sites have attracted a huge population of users, and thus have generated an incredible volume of comments. Unfortunately, it is impossible for users to absorb all the information for every candidate product. Product search is then considered to be a prominent tool to explore online reviews and to make smart consumptions.
+
+Product search queries usually consists of consumption preferences on multiple product features. The goal of product search engine is to locate the right products, and rank them based on how they meet the consumption demands. In other words, the general opinions in reviews of the relevant products should be consistent to the desired properties on each product feature respectfully. Such reviews are regarded as supporting evidences. For example, the query in Fig.~\ref{fig:example} seeks for a restaurant with nice decor that serves hot pot. Product B is relevant, since the second review is a supporting evidence which explicitly states that the two features of restaurant satisfy the query need.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{example.eps}
+\caption{An illustration of product search problem}
+\label{fig:example}
+\end{figure}
+
+To retrieve preferred products from online reviews, several approaches~\cite{Ganesan2012Opinion,Li2011Towards,Duan2013Supporting} have been proposed, most of which are based upon a probabilistic model that measures query-review relevance. They consider a review as supporting, if all the query keywords, including preference keywords and feature keywords, appear in the review. This type of models is limited, as it treats the query as a plain, unstructured ``bag of words'', and does not distinguish the pair-wise correspondence between preferences and features. As illustrated in Fig.~\ref{fig:example}, the first review of product A contains all query keywords. nontheless, it is not a supporting evidence. Because the preferred opinion ``nice'' does not correspond to ``decoration'', instead it is used to describe the feature ``staff''.
+
+The key issue in product search systems is to quantify the relevance between the desired property and the corresponding feature in the reviews. One may easily recognize that relevance is reflected by textual adjacency. In the literature of Information Retrieval, a number of Positional Language Models~\cite{Lv2009Positional,He2011Modeling} have been presented to incorporate term proximity into relevance. Many previous works use traditional IR models to get initial scores of documents and then regularize these scores with a score of proximity between query terms. However, directly applying PLM for product search is problematic.
+
+On one hand, PLM helds a constraint of closeness to all query terms, which might be too strict to harm the accuracy of product ranking. It is possible that a review is a supporting evidence, when many query keywords in the content are remote, as long as the preference keywords are near the corresponding feature keywords. For example, in Fig.~\ref{fig:example}, the average proximity scores for all query terms in review2 for product B is in fact the largest of four reviews. But since both the preferred opinion keywords are close to the feature keywords (``nice '' to ``decor'', ``hot'' to ``pot''), review 2 of product B is the only supporting evidence. Hence it is crucial to segment the query and identify the inner correspondence independently.
+
+On the other hand, given a pair of product feature and preference, PLM is only capable of captureing their association in document level, while product search is implemented at entity level. Each product is linked with a bunch of reviews, where opinions of different reviews may differ, term proximity may vary. The ranking of products is based on the aggregation of supporting evidences. Therefore, it is not trivial to quantify the overall degree of association, given the proximity distributions.
+
+In this paper, we present a formal model to address the above two problems. Following the classic framework of language modeling, we compute the likelihood of observing the query for each product. The query likelihood is factorized to conditional probability of preferred opinion given the product feature. We study the estimation of conditional probability and present three strategies to embed proximity in estimation. Furthermore, we study the effect of aggregated proximity from the review corpus.
+
+\section{Related Work}\label{sec:related}
+
+\section{Model}\label{sec:model}
+
+\subsection{Preliminaries}
+Let us first introduce some notations. Let $D=\{d_1,d_2,\cdots,d_N\}$ be the product universe and $C=\{R_d\}$ is the collection of all reviews, where $R_d$ is the set of review documents for product $d$. As mentioned in section 1, the query consists of several preference phrases on multiple product features. We assume the query is segmented, $q=\{(o,f)\}$ in which $o$ denotes the preferred opinion terms and $f$ represents the corresponding feature keywords. The details of query segmentation will be introduced in Sec.\ref{sec:experiment}. Suppose each product is assigned with a hidden model $d$, and all the review documents are observations sampled from $d$. Our goal is to estimate the likelihood of generating query from the hidden product model.
+\begin{equation}
+p(q|d)=\Pi_{(f,o)} p(f,o|d)=\Pi_{(f,o)} p(f|d)p(o|f,d)
+\label{equ:likelihood}
+\end{equation}
+
+The first part is the probability of selecting feature $f$ from the product, which can be calculated in a frequency based manner. With Dirichlet prior smoothing, we have
+\begin{equation}
+p(f|d)=\frac{c(f,R_d)+\mu p(f|D)}{|R_d|+\mu}
+\label{equ:feature}
+\end{equation}
+
+where  $c(f,R_d)$ is the number of times feature keywords $f$ appears in reviews associated with $d$, and $R_d$ is the number of the reviews for $d$, $\mu$ is the smoothing parameter. $p(f|D)$ is the probability of feature $f$ in the product universe $D$ , which can be approximated by average feature frequency over all products.
+
+The second part is the conditional probability of preferred opinion $o$ given feature $f$ in product $d$. It defines the relevance between an opinion $o$ and a feature $f$ in $d$'s reviews. An accurate estimation of $p(o|f,d)$ is an essential step to capture the true correlation of opinion and feature for the candidate product. We will elaborate on this in the next subsection.
+
+\subsection{Conditional Probability Estimation}
+The interpretation of  $p(o|f,d)$ is that, given a query product $d$ and one of its feature $f$, the possibility for any reviewer to choose the opinion $o$ to describe the feature. Intuitively, this quantity will be reflected as term proximity within all reviews. The nearer two terms $f$ and $o$ appear in $R_d$, the more relevant opinion $o$ is to $f$.  Suppose that we have got the term proximity in the product specific reviews, denoted by $d(o,f,R_d)\in \mathbb{R}$, we have three different strategies to integrate $d(o,f,R_d)$.
+
+\textbf{Proximity Parameterized} The first strategy \textbf{PP} is to represent $p(o|f,d)$ as the probability dense function which is parameterized by proximity. Without loss of generality, we assume that given the feature $f$, the author will select opinion $o$ according to a Gaussian distribution $p(o|f,d)\sim N(\mu,\sigma^2)$. Note that the probability for a Gaussian achieves its maximum at its mean, and decreases as the value is distant from the the mean. If the distance between opinion term $o$ and the feature word $f$ is smallest, i.e. $o$ is an adjective that comes before the noun $f$ ,  such as ``nice decor'', then $o$ is most likely to be the opinion to describe the feature. The above observations lead to the functional form
+
+\begin{equation}
+p(o|f,d)=\frac{1}{\sqrt{2\pi}\sigma}\exp[(-\frac{d(o,f,R_d)^2}{2\sigma^2})]
+\label{equ:parameterized}
+\end{equation}
+
+\textbf{Proximity Adjusted} Another strategy \textbf{PA} is to first compute the probability $p(o|f,d)$, then modify it by the proximity. In general, we have $p(o|f,d)=p(o,f|d)/p(f|d)$. From a frequency prospective, the joint probability $p(o,f|d)=\frac{c(o,f,R_d)}{|R_d|}$, the marginal probability $p(f|d)=\frac{c(f,R_d)}{|R_d|}$. Again, to avoid zero probability, we can adopt Jelinek-Merccer smoothing: $p(o|f,d)=(1-\lambda)\frac{c(o,f,R_d)}{c(f,R_d)}+\lambda \frac{c(o,f,C}{c(f,C)}$.
+
+However, the above definition depends only on the co-occurrences, thus ignore the impact of proximity. Intuitively, a larger distance will weaken the credibility of the frequency-based estimation. We employ an exponential weighting scheme to simulate the negative correlation between terms proximity and conditional probability, so that the confidence of a frequency-based estimation $c(o,f,R_d)$ decreases as the absolute distance increases. In order to guarantee the adjusted function is a probability, i.e. $\Sigma_o p(o|f,d)=1$, the dominator $c(f,R_d)$ should be regularized accordingly. Note that, for each observation $f$ in $R_d$, if we ignore the length limit of review, the integration of confidences assigned to all possible $c(o,f,R_d)$ is $\int_{-\infty}^{+\infty}\exp{-x^2}dx=\sqrt{\pi}$. Therefore, to enhance the computational efficiency, the probability is approximated as follows:
+
+\begin{equation}
+p(o|f,d)=(1-\lambda)\frac{c(o,f,R_d)\exp{(-{d(o,f,R_d)}^2)}}{c(f,R_d)\sqrt{\pi}}+\lambda \frac{c(o,f,C)}{c(f,C)}
+\label{equ:adjusted}
+\end{equation}
+
+
+\textbf{Proximity Censored} Finally we consider probability estimation by directly manipulating the event space. As in the proximity adjusted strategy, $p(o|f,d)$ is proportional to frequency of the event in which the opinion term $o$ and feature keyword $f$ are semantically related. Such a relatedness is invalid, if the two words are far away. Therefore we define the event of observing $o,f$ in a text window of size $\epsilon$. The probability, according to strategy \textbf{PC}, is defined as
+
+\begin{equation}
+p(o|f,d)=\frac{c(o,f,R_d)}{\epsilon c(f,R_d)}
+\label{equ:cencored}
+\end{equation}
+
+where  $c(o,f,R_d)=|\{d(o,f,R_d)<\epsilon\}|$, and obviously $\Sigma_o p(o|f,d)=1$
+
+
+\textbf{Discussion} The presented strategies offer a variety of options to estimate $p(o|f,d)$ with different emphasis. In particular, \textbf{PP} focuses on term proximity, while the rest two combine term frequency and proximity; \textbf{PC} is segmented as it only captures extreme dependency, while the other two is continuous and provide a broader view of semantic correlation; \textbf{PA} takes global frequency over product universe into account, while the remaining two are locally restricted in the current product.
+
+\subsection{Proximity Aggregation}
+which is the difference between the position of $f$ and the position of the nearest observation $o$,
+
+In the estimation of  , we need to study the calculation of term proximity. Because both terms of query are likely to appear more than once in a document, We call these three methods Min, Ave and Max. First of all, assume that we have got all the occurrence positions of both query terms, denoted by   and   for term of opinion and feature respectively, where   and   is the counting of occurrence of each term. These three methods are described as follows.
+\textbf{Min} The strategy of Min is to find out the minimum proximity between the opinion and feature in a document. It can be calculated by the absolute difference of their position of occurrence in the document. Iterating through each position in   and  , we will get the result.
+\textbf{Ave} This strategy aims at measuring the average proximity of two terms co-occurring in the document. We find out all the co-occurrence of opinion and the associated feature in the document and add up the proximity of these term pairs. Divided by the counting of term pairs, we will get the average proximity.
+In the estimation of  , we need tostudy thecalculation of term proximity. Because both terms of query are likely to appear more than once in a documen t, We call these three methods Min, Ave and Max. First of all, assume that we have got all the occurrence positions of both query terms, denoted by   and   for term of opinion and feature respectively, where   and   is the counting of occurrence of each term. These three methods are described as follows.
+\textbf{Min} The strategy of Min is to find out the minimum proximity between the opinion and feature in a document. It can be calculated by the absolute difference of their position of occurrence in the document. Iterating through each position in   and  , we will get the result.
+Ave This strategy aims at measuring the average proximity of two terms co-occurring in the document. We find out all the co-occurrence of opinion and the associated feature in the document and add up the proximity of these term pairs. Divided by the counting of term pairs, we will get the average proximity.
+
+
+
+\section{Experiment}\label{sec:experiment}
+%\blinddocument
+\bibliographystyle{abbrv}
+\bibliography{E:/MyPaper/reference}
+\end{document}

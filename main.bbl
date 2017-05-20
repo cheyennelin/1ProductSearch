@@ -1,0 +1,144 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{Ganesan2012Opinion}
+K.~Ganesan, C.~Zhai, Opinion-based entity ranking, Information retrieval 15~(2)
+  (2012) 116--150.
+
+\bibitem{Li2011Towards}
+B.~Li, A.~Ghose, P.~G. Ipeirotis, Towards a theory model for product search,
+  in: Proceedings of the 20th international conference on world wide web, 2011,
+  pp. 327--336.
+
+\bibitem{Duan2013Supporting}
+H.~Duan, C.~Zhai, J.~Cheng, A.~Gattani, Supporting keyword search in product
+  database: A probabilistic approach, Proc. VLDB Endow. 6~(14) (2013)
+  1786--1797.
+
+\bibitem{Lv2009Positional}
+Y.~Lv, C.~Zhai, Positional language models for information retrieval, in:
+  Proceedings of the 32nd international ACM SIGIR conference on Research and
+  development in information retrieval, SIGIR '09, ACM, New York, NY, USA,
+  2009, pp. 299--306.
+
+\bibitem{He2011Modeling}
+B.~He, J.~X. Huang, X.~Zhou, Modeling term proximity for probabilistic
+  information retrieval models, Information Sciences 8~(14) (2011) 3017–3031.
+
+\bibitem{Zhai2008Statistical}
+C.~Zhai, Statistical language models for information retrieval a critical
+  review, Foundations and Trends in Information Retrieval 2~(3) (2008)
+  137--213.
+
+\bibitem{Yao2013Unified}
+T.~Yao, Y.~Liu, C.-W. Ngo, T.~Mei, Unified entity search in social media
+  community, in: Proceedings of the 22Nd International Conference on World Wide
+  Web, WWW '13, International World Wide Web Conferences Steering Committee,
+  Republic and Canton of Geneva, Switzerland, 2013, pp. 1457--1466.
+
+\bibitem{Levi2012Finding}
+A.~Levi, O.~Mokryn, C.~Diot, N.~Taft, Finding a needle in a haystack of
+  reviews: Cold start context-based hotel recommender system, in: Proceedings
+  of the Sixth ACM Conference on Recommender Systems, RecSys '12, ACM, New
+  York, NY, USA, 2012, pp. 115--122.
+
+\bibitem{Balog2006Formal}
+K.~Balog, L.~Azzopardi, M.~de~Rijke, Formal models for expert finding in
+  enterprise corpora, in: SIGIR '06: Proceedings of the 29th annual
+  international ACM SIGIR conference on Research and development in information
+  retrieval, ACM, New York, NY, USA, 2006, pp. 43--50.
+
+\bibitem{Choi2012CONSENTO}
+J.~Choi, D.~Kim, S.~Kim, J.~Lee, S.~Lim, S.~Lee, J.~Kang, Consento: A new
+  framework for opinion based entity search and summarization, in: Proceedings
+  of the 21st ACM International Conference on Information and Knowledge
+  Management, CIKM '12, ACM, New York, NY, USA, 2012, pp. 1935--1939.
+
+\bibitem{Chen2011Diversifying}
+X.~Chen, H.~Wang, X.~Sun, J.~Pan, Y.~Yu, Diversifying product search results,
+  in: Proceedings of the 34th International ACM SIGIR Conference on Research
+  and Development in Information Retrieval, SIGIR '11, ACM, New York, NY, USA,
+  2011, pp. 1093--1094.
+
+\bibitem{Vandic2013Facet}
+D.~Vandic, F.~Frasincar, U.~Kaymak, Facet selection algorithms for web product
+  search, in: Proceedings of the 22Nd ACM International Conference on
+  Information \& Knowledge Management, CIKM '13, ACM, New York, NY, USA, 2013,
+  pp. 2327--2332.
+
+\bibitem{Ganti2010Keyword}
+V.~Ganti, Y.~He, D.~Xin, Keyword++: A framework to improve keyword search over
+  entity databases, Proc. VLDB Endow. 3~(1-2) (2010) 711--722.
+
+\bibitem{Long2012Enhancing}
+B.~Long, J.~Bian, A.~Dong, Y.~Chang, Enhancing product search by best-selling
+  prediction in e-commerce, in: Proceedings of the 21st ACM International
+  Conference on Information and Knowledge Management, CIKM '12, ACM, New York,
+  NY, USA, 2012, pp. 2479--2482.
+
+\bibitem{Bordino2013Penguins}
+I.~Bordino, Y.~Mejova, M.~Lalmas, Penguins in sweaters, or serendipitous entity
+  search on user-generated content, in: Proceedings of the 22Nd ACM
+  International Conference on Conference on Information \&\#38; Knowledge
+  Management, CIKM '13, ACM, New York, NY, USA, 2013, pp. 109--118.
+
+\bibitem{Srikanth2003Incorporating}
+M.~Srikanth, R.~Srihari, Incorporating query term dependencies in language
+  models for document retrieval, in: Proceedings of the 26th Annual
+  International ACM SIGIR Conference on Research and Development in Informaion
+  Retrieval, SIGIR '03, ACM, New York, NY, USA, 2003, pp. 405--406.
+
+\bibitem{Metzler2005Markov}
+D.~Metzler, W.~B. Croft, A markov random field model for term dependencies, in:
+  Proceedings of the 28th Annual International ACM SIGIR Conference on Research
+  and Development in Information Retrieval, SIGIR '05, ACM, New York, NY, USA,
+  2005, pp. 472--479.
+
+\bibitem{Buttcher2006Term}
+S.~B\"{u}ttcher, C.~L.~A. Clarke, B.~Lushman, Term proximity scoring for ad-hoc
+  retrieval on very large text collections, in: Proceedings of the 29th Annual
+  International ACM SIGIR Conference on Research and Development in Information
+  Retrieval, SIGIR '06, ACM, New York, NY, USA, 2006, pp. 621--622.
+
+\bibitem{Tao2007Exploration}
+T.~Tao, C.~Zhai, An exploration of proximity measures in information retrieval,
+  in: Proceedings of the 30th Annual International ACM SIGIR Conference on
+  Research and Development in Information Retrieval, SIGIR '07, ACM, New York,
+  NY, USA, 2007, pp. 295--302.
+
+\bibitem{Gerani2010Proximity}
+S.~Gerani, M.~J. Carman, F.~Crestani, Proximity-based opinion retrieval, in:
+  Proceedings of the 33rd International ACM SIGIR Conference on Research and
+  Development in Information Retrieval, SIGIR '10, ACM, New York, NY, USA,
+  2010, pp. 403--410.
+
+\bibitem{Zhao2014Modeling}
+J.~Zhao, J.~X. Huang, Z.~Ye, Modeling term associations for probabilistic
+  information retrieval, ACM Trans. Inf. Syst. 32~(2) (2014) 7:1--7:47.
+
+\bibitem{Tu2013Exploiting}
+X.~Tu, J.~Luo, B.~Li, T.~He, M.~Liu, Exploiting proximity feature in
+  statistical translation models for information retrieval, in: Proceedings of
+  the 22nd ACM international conference on Conference on information and
+  knowledge management, CIKM '13, ACM, New York, NY, USA, 2013, pp. 1237--1240.
+
+\bibitem{Ounis2006Terrier}
+I.~Ounis, G.~Amati, V.~Plachouras, B.~He, C.~Macdonald, C.~Lioma, {Terrier: A
+  High Performance and Scalable Information Retrieval Platform}, in:
+  Proceedings of ACM SIGIR'06 Workshop on Open Source Information Retrieval
+  (OSIR 2006), 2006.
+
+\bibitem{Hu2006Opinion}
+M.~Hu, B.~Liu, Opinion feature extraction using class sequential rules., in:
+  AAAI Spring Symposium: Computational Approaches to Analyzing Weblogs, 2006,
+  pp. 61--66.
+
+\bibitem{Qiu2011Opinion}
+G.~Qiu, B.~Liu, J.~Bu, C.~Chen, Opinion word expansion and target extraction
+  through double propagation, Computational linguistics 37~(1) (2011) 9--27.
+
+\end{thebibliography}
